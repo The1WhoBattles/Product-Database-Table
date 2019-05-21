@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>CSD4464-Midterm - Products</title>
+    </h:head>
+    <h:body>
+
+        <h:form>
+            <h:dataTable value="#{productController.products}" var="p">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                        #{p.productId}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                        #{p.description}
+                </h:column>            
+                <h:column>
+                    <f:facet name="header">Manufacturer</f:facet>
+                        #{p.manufacturerId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Manufacturer Name</f:facet>
+                        #{manufacturerController.getByID(p.manufacturerId).name}
+                </h:column>            
+                <h:column>
+                    <f:facet name="header" >Rep Name</f:facet>
+                        #{manufacturerController.getByID(p.manufacturerId).repName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Phone Number</f:facet>
+                        #{manufacturerController.getByID(p.manufacturerId).phoneNumber}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Actions</f:facet>
+                    <h:commandButton value="Delete" action="#{productController.removeByID(p.productId)}" />
+                    <h:commandButton value="Edit" action="#{productController.editByID(p.productId)}" />
+                </h:column>
+
+
+            </h:dataTable>
+            <div>
+                <h:link outcome="addProduct" value="Add Product" />
+            </div>
+            <div>
+                <h:link outcome="addManufacturer" value="Add Manufacturer" />
+            </div>
+
+        </h:form>
+
+    </h:body>
+</html>
+
